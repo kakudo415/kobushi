@@ -1,6 +1,8 @@
 package db
 
 import (
+	"os"
+
 	"github.com/jinzhu/gorm"
 	"github.com/rs/xid"
 
@@ -27,7 +29,7 @@ var db *gorm.DB
 
 func conn() {
 	var err error
-	db, err = gorm.Open("mysql", "")
+	db, err = gorm.Open("mysql", os.Getenv("KOBUSHI_DB"))
 	if err != nil {
 		panic(err)
 	}
