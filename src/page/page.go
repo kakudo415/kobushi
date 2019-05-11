@@ -6,7 +6,7 @@ import (
 
 // Top page
 func Top(c *gin.Context) {
-	c.HTML(200, "index.html", gin.H{})
+	c.HTML(200, "top.html", gin.H{})
 }
 
 // Topic page

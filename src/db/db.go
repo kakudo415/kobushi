@@ -27,6 +27,16 @@ type Messages struct {
 
 var db *gorm.DB
 
+// NewTopic from Title and Author
+func NewTopic(title, author, desc string) {
+	t := new(Topics)
+	t.ID = xid.New()
+	t.Title = title
+	t.Author = author
+	t.Desc = desc
+	db.FirstOrCreate(t)
+}
+
 func conn() {
 	var err error
 	db, err = gorm.Open("mysql", os.Getenv("KOBUSHI_DB"))
@@ -37,4 +47,6 @@ func conn() {
 
 func init() {
 	conn()
+	db.AutoMigrate(new(Topics))
+	db.AutoMigrate(new(Messages))
 }
