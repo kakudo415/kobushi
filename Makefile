@@ -1,4 +1,4 @@
-main: package
+main:
 	go build -o bin/kobushi src/main.go
 run: main
 	./bin/kobushi

@@ -2,10 +2,15 @@
 <html lang="ja">
 <head>
   {{ template "HEADER" }}
-  <script src="static/top.js"></script>
+  <script src="static/top.js" defer></script>
   <title>Kobushi</title>
 </head>
 <body>
-
+  <form name="new-ring-form">
+    <input type="text" name="title">
+    <input type="text" name="author">
+    <input type="text" name="desc">
+    <button type="button" name="submit">リングを作る</button>
+  </form>
 </body>
 </html>

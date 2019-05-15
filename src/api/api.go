@@ -6,18 +6,24 @@ import (
 	"../db"
 )
 
-// NewTopicJSON - POST API
-type NewTopicJSON struct {
-	Title  string
-	Author string
-	Desc   string // Description
+// NewRingJSON - POST API
+type NewRingJSON struct {
+	Title  string `json:"title"`
+	Author string `json:"author"`
+	Desc   string `json:"description"`
 }
 
-// NewTopic API
-func NewTopic(c *gin.Context) {
-	j := new(NewTopicJSON)
+// NewRingIDJSON - POST API Response
+type NewRingIDJSON struct {
+	RingID string `json:"ring_id"`
+}
+
+// NewRing API
+func NewRing(c *gin.Context) {
+	j := new(NewRingJSON)
 	c.BindJSON(j)
-	db.NewTopic(j.Title, j.Author, j.Desc)
+	id := db.NewRing(j.Title, j.Author, j.Desc)
+	c.JSON(200, NewRingIDJSON{RingID: id})
 }
 
 // NewKobushi API

@@ -2,6 +2,8 @@ package page
 
 import (
 	"github.com/gin-gonic/gin"
+
+	"../db"
 )
 
 // Top page
@@ -9,9 +11,14 @@ func Top(c *gin.Context) {
 	c.HTML(200, "top.html", gin.H{})
 }
 
-// Topic page
-func Topic(c *gin.Context) {
-
+// Ring page
+func Ring(c *gin.Context) {
+	r, e := db.GetRing(c.Param("ring_id"))
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	c.HTML(200, "ring.html", gin.H{"aiueo": r.Title + " " + r.Author})
 }
 
 // Kobushi page
