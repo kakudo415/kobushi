@@ -18,17 +18,39 @@ type NewRingIDJSON struct {
 	RingID string `json:"ring_id"`
 }
 
+// NewKobushiJSON - POST API
+type NewKobushiJSON struct {
+	Title string `json:"title"`
+	Desc  string `json:"description"`
+}
+
+// NewKobushiIDJSON - POST API Response
+type NewKobushiIDJSON struct {
+	KobushiID string `json:"kobushi_id"`
+}
+
 // NewRing API
 func NewRing(c *gin.Context) {
 	j := new(NewRingJSON)
 	c.BindJSON(j)
-	id := db.NewRing(j.Title, j.Author, j.Desc)
-	c.JSON(200, NewRingIDJSON{RingID: id})
+	r, e := db.NewRing(j.Title, j.Author, j.Desc)
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	c.JSON(200, NewRingIDJSON{RingID: r.ID})
 }
 
 // NewKobushi API
 func NewKobushi(c *gin.Context) {
-
+	j := new(NewKobushiJSON)
+	c.BindJSON(j)
+	k, e := db.NewKobushi(j.Title, c.Param("ring_id"), j.Desc)
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	c.JSON(200, NewKobushiIDJSON{KobushiID: k.ID})
 }
 
 // NewMessage API

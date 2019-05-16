@@ -2,9 +2,18 @@
 <html lang="ja">
 <head>
   {{ template "HEADER" }}
+  <script src="/static/ring.js" defer></script>
   <title>Kobushi</title>
 </head>
 <body>
   {{ .aiueo }}
+  <form name="new-kobushi-form">
+    <input type="text" name="title">
+    <input type="text" name="desc">
+    <button type="button" name="submit">拳をぶつける</button>
+  </form>
+  <div>
+    {{ .Kobushis }}
+  </div>
 </body>
 </html>

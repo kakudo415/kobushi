@@ -23,5 +23,5 @@ func Ring(c *gin.Context) {
 
 // Kobushi page
 func Kobushi(c *gin.Context) {
-
+	// k, e := db.GetKobushi(c.Param("ring_id"), c.Param("kobushi_id"))
 }
