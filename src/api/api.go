@@ -29,6 +29,11 @@ type NewKobushiIDJSON struct {
 	KobushiID string `json:"kobushi_id"`
 }
 
+// NewMessageJSON - POST API
+type NewMessageJSON struct {
+	Body string `json:"body"`
+}
+
 // NewRing API
 func NewRing(c *gin.Context) {
 	j := new(NewRingJSON)
@@ -38,7 +43,7 @@ func NewRing(c *gin.Context) {
 		c.Status(404)
 		return
 	}
-	c.JSON(200, NewRingIDJSON{RingID: r.ID})
+	c.JSON(200, NewRingIDJSON{RingID: r.ID.ToDec()})
 }
 
 // NewKobushi API
@@ -50,10 +55,17 @@ func NewKobushi(c *gin.Context) {
 		c.Status(404)
 		return
 	}
-	c.JSON(200, NewKobushiIDJSON{KobushiID: k.ID})
+	c.JSON(200, NewKobushiIDJSON{KobushiID: k.ID.ToDec()})
 }
 
 // NewMessage API
 func NewMessage(c *gin.Context) {
-
+	j := new(NewMessageJSON)
+	c.BindJSON(j)
+	_, e := db.NewMessage(c.Param("kobushi_id"), j.Body)
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	c.Status(200)
 }

@@ -16,8 +16,8 @@ func main() {
 	engine.POST("/", api.NewRing)
 	engine.GET("/ring/:ring_id", page.Ring)
 	engine.POST("/ring/:ring_id", api.NewKobushi)
-	engine.GET("/ring/:ring_id/:kobushi", page.Kobushi)
-	engine.POST("/ring/:ring_id/:kobushi", api.NewMessage)
+	engine.GET("/ring/:ring_id/:kobushi_id", page.Kobushi)
+	engine.POST("/ring/:ring_id/:kobushi_id", api.NewMessage)
 	engine.StaticFS("/static/", http.Dir("views/static/"))
 	engine.Run()
 }
