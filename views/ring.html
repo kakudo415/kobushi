@@ -6,14 +6,16 @@
   <title>Kobushi</title>
 </head>
 <body>
-  {{ .aiueo }}
+  {{ .Kobushi }}
   <form name="new-kobushi-form">
     <input type="text" name="title">
     <input type="text" name="desc">
     <button type="button" name="submit">拳をぶつける</button>
   </form>
   <div>
-    {{ .Kobushis }}
+    {{ range .Kobushis }}
+      <a href="{{ .Path }}">{{ .Title }}</a>
+    {{ end }}
   </div>
 </body>
 </html>

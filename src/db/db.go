@@ -38,37 +38,38 @@ type Messages struct {
 	Time      time.Time
 }
 
-const pageSize = 25 // Messages page size
+const kobushiPageSize = 25
+const messagePageSize = 25
 
 var db *gorm.DB
 
 // NewRing from Title and Author (Desc)
 func NewRing(title, author, desc string) (Rings, error) {
-	t := new(Rings)
+	r := new(Rings)
 	if len(title) == 0 || len(author) == 0 {
-		return *t, errors.New("EMPTY TITLE OR AUTHOR")
+		return *r, errors.New("EMPTY TITLE OR AUTHOR")
 	}
-	t.ID = kid.New(0)
-	t.Title = title
-	t.Author = author
-	t.Desc = desc
-	t.Time = time.Now()
-	db.Create(t)
-	return *t, nil
+	r.ID = kid.New(0)
+	r.Title = title
+	r.Author = author
+	r.Desc = desc
+	r.Time = time.Now()
+	db.Create(r)
+	return *r, nil
 }
 
 // GetRing by ID
 func GetRing(id string) (Rings, error) {
-	t := new(Rings)
-	t.ID = kid.Parse(id)
-	if t.ID.IsError() {
-		return *t, errors.New("INVALID ID")
+	r := new(Rings)
+	r.ID = kid.Parse(id)
+	if r.ID.IsError() {
+		return *r, errors.New("INVALID ID")
 	}
-	res := db.Take(t)
+	res := db.Take(r)
 	if e := res.Error; e != nil {
-		return *t, e
+		return *r, e
 	}
-	return *t, nil
+	return *r, nil
 }
 
 // NewKobushi from Title and RingID (Desc)
@@ -89,6 +90,17 @@ func NewKobushi(title, ringID, desc string) (Kobushis, error) {
 	return *k, nil
 }
 
+// GetKobushis (max = kobushiPageSize)
+func GetKobushis(ringID string, offset int) ([]Kobushis, error) {
+	ks := new([]Kobushis)
+	rID := kid.Parse(ringID)
+	if rID.IsError() {
+		return *ks, errors.New("INVALID RING ID")
+	}
+	db.Order("time desc").Limit(kobushiPageSize).Offset(offset*kobushiPageSize).Find(ks, "ring_id=?", rID)
+	return *ks, nil
+}
+
 // NewMessage from KobushiID and Body text
 func NewMessage(kobushiID, body string) (Messages, error) {
 	m := new(Messages)
@@ -103,14 +115,14 @@ func NewMessage(kobushiID, body string) (Messages, error) {
 	return *m, nil
 }
 
-// GetMessages (max = pageSize)
-func GetMessages(kobushiID string, offset uint) ([]Messages, error) {
+// GetMessages (max = messagePageSize)
+func GetMessages(kobushiID string, offset int) ([]Messages, error) {
 	ms := new([]Messages)
 	kID := kid.Parse(kobushiID)
-	if kID == 0 {
-		return *ms, errors.New("INVALID ID")
+	if kID.IsError() {
+		return *ms, errors.New("INVALID KOBUSHI ID")
 	}
-	db.Order("time desc").Limit(pageSize).Offset(offset*pageSize).Find(ms, "kobushi_id=?", kID)
+	db.Order("time desc").Limit(messagePageSize).Offset(offset*messagePageSize).Find(ms, "kobushi_id=?", kID)
 	return *ms, nil
 }
 
@@ -124,7 +136,6 @@ func conn() {
 
 func init() {
 	conn()
-	db.LogMode(true)
 	db.AutoMigrate(new(Rings))
 	db.AutoMigrate(new(Kobushis)).AddForeignKey("ring_id", "rings(id)", "CASCADE", "CASCADE")
 	db.AutoMigrate(new(Messages)).AddForeignKey("kobushi_id", "kobushis(id)", "CASCADE", "CASCADE")
