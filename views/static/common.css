@@ -19,6 +19,15 @@ header h1 {
   font-family: 'Quicksand', sans-serif;
   font-size: 1.75rem;
 }
+header h1 a {
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+}
+header h1 img {
+  margin-right: 0.5rem;
+  height: 1.75rem;
+}
 header > div > *:first-child {
   margin-right: auto;
 }
