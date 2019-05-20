@@ -13,6 +13,12 @@ const sendNewRing = (title, author, desc) => {
       description: desc
     })
   }).then((res) => {
+    if (!res.ok) {
+      throw Error(res.statusText); 
+    }
+    newRingFormHTML.elements["title"].value = "";
+    newRingFormHTML.elements["author"].value = "";
+    newRingFormHTML.elements["desc"].value = "";
     return res.json();
   }).then((json) => {
     location.pathname = `/ring/${json.ring_id}`;

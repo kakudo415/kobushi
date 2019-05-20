@@ -14,6 +14,8 @@ const sendNewMessage = (body) => {
     if (!res.ok) {
       throw Error(res.statusText);
     }
+    newMessageFormHTML.elements["body"].value = "";
+    location.reload();
   }).catch((err) => {
     console.error(err);
   });

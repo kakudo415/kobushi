@@ -15,6 +15,8 @@ const sendNewKobushi = (title, desc) => {
     if (!res.ok) {
       throw Error(res.statusText); 
     }
+    newKobushiFormHTML.elements["title"].value = "";
+    newKobushiFormHTML.elements["desc"].value = "";
     return res.json();
   }).then((json) => {
     location.pathname += `/${json.kobushi_id}`;
