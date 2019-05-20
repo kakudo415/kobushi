@@ -10,8 +10,13 @@
   {{ template "HEADER" }}
   <main>
     <div>
+      <div id="breadcrumb">
+        <a href="/">Top</a>
+        <i class="fas fa-angle-right"></i>
+        <a href="/ring/{{ .Ring.ID.ToDec }}">{{ .Ring.Title }}</a>
+      </div>
       <div id="ring-info">
-        <h1><i class="fas fa-vector-square"></i>{{ .Ring.Title }}</h1>
+        <h1>{{ .Ring.Title }}</h1>
         {{ if .Ring.Author }}
         <div class="author">by {{ .Ring.Author }}</div>
         {{ end }}
@@ -21,7 +26,7 @@
       </div>
       <div id="kobushis">
         <div class="header">
-          <h2><i class="fas fa-hand-rock"></i>こぶし</h2>
+          <h2><i class="fas fa-question"></i>質問</h2>
           <aside>最近投稿された質問です</aside>
         </div>
         <div class="contents">
@@ -34,18 +39,16 @@
           </div>
           {{ end }}
         </div>
-        <div id="page-control">
-          <a id="prev-page-button"><i class="fas fa-backward"></i></a>
-          <a id="next-page-button"><i class="fas fa-forward"></i></a>
-        </div>
+        {{ template "PAGE_CONTROL" }}
       </div>
       <div id="new-kobushi">
+        <h2><i class="fas fa-plus"></i>あたらしい質問を作る</h2>
         <form id="new-kobushi-form">
           <label for="title">タイトル</label>
           <input type="text" name="title">
           <label for="desc">説明</label>
           <input type="text" name="desc">
-          <button type="button" name="submit" class="submit">質問する</button>
+          <button type="button" name="submit" class="submit">投稿する</button>
         </form>
       </div>
     </div>

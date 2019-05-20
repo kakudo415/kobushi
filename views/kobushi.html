@@ -2,19 +2,46 @@
 <html lang="ja">
 <head>
   {{ template "HEAD" }}
+  <link rel="stylesheet" href="/static/kobushi.css">
   <script src="/static/kobushi.js" defer></script>
   <title>Kobushi</title>
 </head>
 <body>
   {{ template "HEADER" }}
-  <form name="new-message-form">
-    <input type="text" name="body">
-    <button type="button" name="submit">投稿</button>
-  </form>
-  <div>
-    {{ range .Messages }}
-    <div>{{ .Body }}</div>
-    {{ end }}
-  </div>
+  <main>
+    <div>
+      <div id="breadcrumb">
+        <a href="/">Top</a>
+        <i class="fas fa-angle-right"></i>
+        <a href="/ring/{{ .Ring.ID.ToDec }}">{{ .Ring.Title }}</a>
+        <i class="fas fa-angle-right"></i>
+        <a href="/ring/{{ .Ring.ID.ToDec }}/{{ .Kobushi.ID.ToDec }}">{{ .Kobushi.Title }}</a>
+      </div>
+      <div id="kobushi-info">
+        <div class="time">{{ printf "%d年%d月%d日" .Kobushi.Time.Year .Kobushi.Time.Month .Kobushi.Time.Day }}</div>
+        <h1>{{ .Kobushi.Title }}</h1>
+        {{ if .Kobushi.Desc }}
+        <div class="description">{{ .Kobushi.Desc }}</div>
+        {{ end }}
+      </div>
+      <div id="messages">
+        <div class="contents">
+          {{ range .Messages }}
+          <div>
+            <aside class="time">{{ printf "%d-%d-%d %d:%d" .Time.Year .Time.Month .Time.Day .Time.Hour .Time.Minute }}</aside>
+            <div class="body">{{ .Body }}</div>
+          </div>
+          {{ end }}
+        </div>
+        {{ template "PAGE_CONTROL" }}
+      </div>
+      <div id="new-message">
+        <form id="new-message-form">
+          <input type="text" name="body" placeholder="あなたのアイディアを残しましょう！">
+          <button type="button" name="submit" class="submit">投稿</button>
+        </form>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

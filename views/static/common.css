@@ -33,10 +33,42 @@ header .ring-button:hover {
   background: #FFF5;
 }
 
+#breadcrumb {
+  margin-bottom: 1rem;
+  color: #0008;
+}
+#breadcrumb a:hover {
+  text-decoration: underline;
+}
+#breadcrumb i {
+  margin: 0 0.5rem;
+}
+
 main {
   padding: 0 0.5rem;
 }
 main > div {
   max-width: 960px;
   margin: 1.5rem auto;
+}
+
+#page-control {
+  padding: 0.75rem 0;
+  display: flex;
+  justify-content: space-around;
+}
+#prev-page-button, #next-page-button {
+  height: 3rem;
+  width: 3rem;
+  padding: 15px 0;
+  color: #0003;
+  text-align: center;
+  border: 1px solid #0001;
+  border-radius: 50%;
+}
+#prev-page-button:enabled, #next-page-button:enabled {
+  color: #000C;
+}
+#prev-page-button:enabled:hover, #next-page-button:enabled:hover {
+  background: #00000008;
 }

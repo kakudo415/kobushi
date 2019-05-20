@@ -27,7 +27,7 @@
   align-items: center;
 }
 #kobushis .header h2 {
-  margin-right: 0.875rem;
+  margin-right: 0.75rem;
 }
 #kobushis .header h2 i {
   margin-right: 0.5rem;
@@ -38,7 +38,7 @@
 }
 
 #kobushis .contents > div {
-  padding: 0.875rem;
+  padding: 0.75rem;
   border-top: 1px solid #0001;
 }
 #kobushis .contents a {
@@ -48,29 +48,9 @@
   text-decoration: underline;
 }
 #kobushis .contents > div > div {
-  margin-top: 0.4375rem;
+  margin-top: 0.5rem;
   font-size: 0.875rem;
   color: #0008;
-}
-
-#page-control {
-  display: flex;
-  border-top: 1px solid #0001;
-}
-#prev-page-button, #next-page-button {
-  width: 50%;
-  padding: 0.875rem;
-  color: #0003;
-  text-align: center;
-}
-#prev-page-button > i, #next-page-button > i {
-  font-size: 2rem;
-}
-#prev-page-button:enabled, #next-page-button:enabled {
-  color: #000C;
-}
-#prev-page-button:enabled:hover, #next-page-button:enabled:hover {
-  background: #007FFF88;
 }
 
 #new-kobushi {
@@ -78,33 +58,33 @@
   background: #FFF;
 }
 #new-kobushi h2 {
-  padding: 0.875rem;
+  padding: 0.75rem;
   border-bottom: 1px solid #0001;
 }
 #new-kobushi h2 i {
-  margin-right: 0.4375rem;
+  margin-right: 0.5rem;
 }
 #new-kobushi-form {
-  padding: 0.875rem;
+  padding: 0.75rem;
 }
 #new-kobushi-form > * {
   display: block;
 }
 #new-kobushi label {
-  margin-bottom: 0.4375rem;
+  margin-bottom: 0.5rem;
   font-size: 0.875rem;
   color: #0008;
 }
 #new-kobushi input {
   width: 100%;
-  margin-bottom: 0.875rem;
+  margin-bottom: 0.75rem;
   padding: 0.5rem;
   border: 1px solid #0001;
   background: #00000008;
 }
 #new-kobushi .submit {
   width: 100%;
-  padding: 0.875rem 0;
+  padding: 0.75rem 0;
   color: #FFF;
   background: #007FFF;
   cursor: pointer;

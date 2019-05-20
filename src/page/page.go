@@ -65,13 +65,23 @@ func Ring(c *gin.Context) {
 
 // Kobushi page
 func Kobushi(c *gin.Context) {
-	offset := parsePage(c)
-	m, e := db.GetMessages(c.Param("kobushi_id"), offset)
+	r, e := db.GetRing(c.Param("ring_id"))
 	if e != nil {
 		c.Status(404)
 		return
 	}
-	c.HTML(200, "kobushi.html", gin.H{"Messages": m})
+	k, e := db.GetKobushi(c.Param("kobushi_id"))
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	offset := parsePage(c)
+	ms, e := db.GetMessages(c.Param("kobushi_id"), offset)
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	c.HTML(200, "kobushi.html", gin.H{"Ring": r, "Kobushi": k, "Messages": ms})
 }
 
 func parsePage(c *gin.Context) int {

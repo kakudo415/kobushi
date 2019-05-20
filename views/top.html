@@ -12,8 +12,8 @@
     <div>
       <div id="rings">
         <div class="header">
-          <h2><i class="fas fa-vector-square"></i>リング</h2>
-          <aside>最近できた質問の場です</aside>
+          <h2><i class="fas fa-vector-square"></i>話題</h2>
+          <aside>最近できた質問・議論の場です</aside>
         </div>
         <div class="contents">
           {{ range .Rings }}
@@ -23,21 +23,18 @@
           </div>
           {{ end }}
         </div>
-        <div id="page-control">
-          <a id="prev-page-button"><i class="fas fa-backward"></i></a>
-          <a id="next-page-button"><i class="fas fa-forward"></i></a>
-        </div>
+        {{ template "PAGE_CONTROL" }}
       </div>
       <div id="new-ring">
-        <h2><i class="fas fa-plus"></i>あたらしいリングを作る</h2>
+        <h2><i class="fas fa-plus"></i>新しい話題を作る</h2>
         <form id="new-ring-form">
           <label for="title">タイトル (必須)</label>
-          <input type="text" name="title" class="title">
+          <input type="text" name="title" class="title" placeholder="あたらしい話題に名前をつけましょう！">
           <label for="author">名前</label>
           <input type="text" name="author" class="author">
-          <label for="desc">概要</label>
+          <label for="desc">説明</label>
           <input type="text" name="desc" class="desc">
-          <button type="button" name="submit" class="submit">リングを作る</button>
+          <button type="button" name="submit" class="submit">話題を作る</button>
         </form>
       </div>
     </div>
