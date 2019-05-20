@@ -8,6 +8,12 @@ import (
 	"../db"
 )
 
+type ring struct {
+	Path  string
+	Title string
+	Desc  string
+}
+
 type kobushi struct {
 	Path  string
 	Title string
@@ -16,7 +22,21 @@ type kobushi struct {
 
 // Top page
 func Top(c *gin.Context) {
-	c.HTML(200, "top.html", gin.H{})
+	offset := parsePage(c)
+	rs, e := db.GetRings(offset)
+	if e != nil {
+		c.Status(404)
+		return
+	}
+	var frs []ring
+	for _, v := range rs {
+		frs = append(frs, ring{
+			Path:  "./ring/" + v.ID.ToDec(),
+			Title: v.Title,
+			Desc:  v.Desc,
+		})
+	}
+	c.HTML(200, "top.html", gin.H{"Rings": frs})
 }
 
 // Ring page
@@ -34,12 +54,11 @@ func Ring(c *gin.Context) {
 	}
 	var fks []kobushi
 	for _, v := range ks {
-		fk := kobushi{
+		fks = append(fks, kobushi{
 			Path:  "./" + v.RingID.ToDec() + "/" + v.ID.ToDec(),
 			Title: v.Title,
 			Desc:  v.Desc,
-		}
-		fks = append(fks, fk)
+		})
 	}
 	c.HTML(200, "ring.html", gin.H{"Kobushi": r.Title + " " + r.Author, "Kobushis": fks})
 }

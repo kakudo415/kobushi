@@ -12,5 +12,10 @@
     <input type="text" name="desc">
     <button type="button" name="submit">リングを作る</button>
   </form>
+  <div>
+    {{ range .Rings }}
+      <a href="{{ .Path }}">{{ .Title }}</a>
+    {{ end }}
+  </div>
 </body>
 </html>

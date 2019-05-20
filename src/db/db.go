@@ -38,6 +38,7 @@ type Messages struct {
 	Time      time.Time
 }
 
+const ringPageSize = 25
 const kobushiPageSize = 25
 const messagePageSize = 25
 
@@ -70,6 +71,13 @@ func GetRing(id string) (Rings, error) {
 		return *r, e
 	}
 	return *r, nil
+}
+
+// GetRings (max = ringsPageSize)
+func GetRings(offset int) ([]Rings, error) {
+	rs := new([]Rings)
+	db.Order("time desc").Limit(ringPageSize).Offset(offset * ringPageSize).Find(rs)
+	return *rs, nil
 }
 
 // NewKobushi from Title and RingID (Desc)
