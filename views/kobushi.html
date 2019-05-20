@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  {{ template "HEADER" }}
+  {{ template "HEAD" }}
   <script src="/static/kobushi.js" defer></script>
   <title>Kobushi</title>
 </head>
 <body>
+  {{ template "HEADER" }}
   <form name="new-message-form">
     <input type="text" name="body">
     <button type="button" name="submit">投稿</button>
   </form>
   <div>
     {{ range .Messages }}
-      <div>{{ .Body }}</div>
+    <div>{{ .Body }}</div>
     {{ end }}
   </div>
 </body>

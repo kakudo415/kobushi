@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  {{ template "HEADER" }}
+  {{ template "HEAD" }}
+  <link rel="stylesheet" href="./static/top.css">
   <script src="static/top.js" defer></script>
   <title>Kobushi</title>
 </head>
 <body>
-  <form name="new-ring-form">
-    <input type="text" name="title">
-    <input type="text" name="author">
-    <input type="text" name="desc">
-    <button type="button" name="submit">リングを作る</button>
-  </form>
-  <div>
-    {{ range .Rings }}
-      <a href="{{ .Path }}">{{ .Title }}</a>
-    {{ end }}
-  </div>
+  {{ template "HEADER" }}
+  <main>
+    <div>
+      <div id="rings">
+        <div class="header">
+          <h2><i class="fas fa-ring"></i>リング</h2>
+          <aside>最近できた質問の場です</aside>
+        </div>
+        <div class="contents">
+          {{ range .Rings }}
+          <div>
+            <a href="{{ .Path }}">{{ .Title }}</a>
+            <div>{{ .Desc }}</div>
+          </div>
+          {{ end }}
+        </div>
+        <div id="page-control">
+          <a id="prev-page-button"><i class="fas fa-backward"></i></a>
+          <a id="next-page-button"><i class="fas fa-forward"></i></a>
+        </div>
+      </div>
+      <div id="new-ring">
+        <h2><i class="fas fa-plus"></i>あたらしいリングを作る</h2>
+        <form id="new-ring-form">
+          <label for="title">タイトル (必須)</label>
+          <input type="text" name="title" class="title">
+          <label for="author">名前</label>
+          <input type="text" name="author" class="author">
+          <label for="desc">概要</label>
+          <input type="text" name="desc" class="desc">
+          <button type="button" name="submit" class="submit">リングを作る</button>
+        </form>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

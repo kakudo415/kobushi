@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  {{ template "HEADER" }}
+  {{ template "HEAD" }}
   <script src="/static/ring.js" defer></script>
   <title>Kobushi</title>
 </head>
 <body>
+  {{ template "HEADER" }}
   {{ .Kobushi }}
   <form name="new-kobushi-form">
     <input type="text" name="title">

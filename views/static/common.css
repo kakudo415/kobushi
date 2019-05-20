@@ -1,6 +1,39 @@
-/* Temp */
-input, button {
-  height: 2rem;
-  padding: 0 0.5rem;
-  border: 1px solid #0003;
+body {
+  color: #000C;
+  background: #00000008;
+}
+
+header {
+  padding: 0 0.875rem;
+  color: #FFF;
+  background: #007FFF;
+}
+header > div {
+  height: 3.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+header h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.75rem;
+}
+header > div > *:first-child {
+  margin-right: auto;
+}
+header .ring-button {
+  display: block;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  background: #FFF3;
+  border-radius: 0.125rem;
+}
+header .ring-button:hover {
+  background: #FFF5;
+}
+
+main > div {
+  max-width: 960px;
+  margin: 1.75rem auto;
 }
