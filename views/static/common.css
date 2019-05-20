@@ -4,7 +4,7 @@ body {
 }
 
 header {
-  padding: 0 0.875rem;
+  padding: 0 0.5rem;
   color: #FFF;
   background: #007FFF;
 }
@@ -27,13 +27,16 @@ header .ring-button {
   padding: 0.75rem;
   font-size: 0.875rem;
   background: #FFF3;
-  border-radius: 0.125rem;
+  border-radius: 0.25rem;
 }
 header .ring-button:hover {
   background: #FFF5;
 }
 
+main {
+  padding: 0 0.5rem;
+}
 main > div {
   max-width: 960px;
-  margin: 1.75rem auto;
+  margin: 1.5rem auto;
 }

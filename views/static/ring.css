@@ -1,34 +1,53 @@
-#rings {
+#ring-info {
+  padding: 1rem;
   background: #FFF;
 }
-#rings .header {
+#ring-info h1 {
+  font-size: 1.75rem;
+}
+#ring-info h1 i {
+  margin-right: 0.5rem;
+}
+#ring-info .author {
+  margin-top: 0.75rem;
+}
+#ring-info .description {
+  margin-top: 0.75rem;
+  color: #0008;
+}
+
+#kobushis {
+  margin-top: 1.5rem;
+  background: #FFF;
+}
+#kobushis .header {
   height: 2.75rem;
   padding: 0 0.75rem;
   display: flex;
   align-items: center;
 }
-#rings .header h2 {
+#kobushis .header h2 {
   margin-right: 0.875rem;
 }
-#rings .header h2 i {
-  margin-right: 0.4375rem;
+#kobushis .header h2 i {
+  margin-right: 0.5rem;
 }
-#rings .header aside {
+#kobushis .header aside {
   font-size: 0.875rem;
   color: #0008;
 }
 
-#rings .contents > div {
+#kobushis .contents > div {
   padding: 0.875rem;
   border-top: 1px solid #0001;
 }
-#rings .contents a {
+#kobushis .contents a {
   font-weight: bold;
 }
-#rings .contents a:hover {
+#kobushis .contents a:hover {
   text-decoration: underline;
 }
-#rings .contents > div > div {
+#kobushis .contents > div > div {
   margin-top: 0.4375rem;
   font-size: 0.875rem;
   color: #0008;
@@ -54,42 +73,42 @@
   background: #007FFF88;
 }
 
-#new-ring {
+#new-kobushi {
   margin-top: 1.75rem;
   background: #FFF;
 }
-#new-ring h2 {
+#new-kobushi h2 {
   padding: 0.875rem;
   border-bottom: 1px solid #0001;
 }
-#new-ring h2 i {
+#new-kobushi h2 i {
   margin-right: 0.4375rem;
 }
-#new-ring-form {
+#new-kobushi-form {
   padding: 0.875rem;
 }
-#new-ring-form > * {
+#new-kobushi-form > * {
   display: block;
 }
-#new-ring label {
+#new-kobushi label {
   margin-bottom: 0.4375rem;
   font-size: 0.875rem;
   color: #0008;
 }
-#new-ring input {
+#new-kobushi input {
   width: 100%;
   margin-bottom: 0.875rem;
   padding: 0.5rem;
   border: 1px solid #0001;
   background: #00000008;
 }
-#new-ring .submit {
+#new-kobushi .submit {
   width: 100%;
   padding: 0.875rem 0;
   color: #FFF;
   background: #007FFF;
   cursor: pointer;
 }
-#new-ring .submit:hover {
+#new-kobushi .submit:hover {
   background: #007FFFCC;
 }

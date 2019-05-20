@@ -15,7 +15,7 @@ const sendNewRing = (title, author, desc) => {
   }).then((res) => {
     return res.json();
   }).then((json) => {
-    location.href = `/ring/${json.ring_id}`;
+    location.pathname = `/ring/${json.ring_id}`;
   }).catch((err) => {
     console.error(err);
   });

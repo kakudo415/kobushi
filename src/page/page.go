@@ -60,7 +60,7 @@ func Ring(c *gin.Context) {
 			Desc:  v.Desc,
 		})
 	}
-	c.HTML(200, "ring.html", gin.H{"Kobushi": r.Title + " " + r.Author, "Kobushis": fks})
+	c.HTML(200, "ring.html", gin.H{"Ring": r, "Kobushis": fks})
 }
 
 // Kobushi page

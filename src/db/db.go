@@ -47,8 +47,8 @@ var db *gorm.DB
 // NewRing from Title and Author (Desc)
 func NewRing(title, author, desc string) (Rings, error) {
 	r := new(Rings)
-	if len(title) == 0 || len(author) == 0 {
-		return *r, errors.New("EMPTY TITLE OR AUTHOR")
+	if len(title) == 0 {
+		return *r, errors.New("EMPTY TITLE")
 	}
 	r.ID = kid.New(0)
 	r.Title = title
@@ -98,6 +98,20 @@ func NewKobushi(title, ringID, desc string) (Kobushis, error) {
 	return *k, nil
 }
 
+// GetKobushi by ID
+func GetKobushi(id string) (Kobushis, error) {
+	k := new(Kobushis)
+	k.ID = kid.Parse(id)
+	if k.ID.IsError() {
+		return *k, errors.New("INVALID ID")
+	}
+	res := db.Take(k)
+	if e := res.Error; e != nil {
+		return *k, e
+	}
+	return *k, nil
+}
+
 // GetKobushis (max = kobushiPageSize)
 func GetKobushis(ringID string, offset int) ([]Kobushis, error) {
 	ks := new([]Kobushis)
@@ -112,6 +126,9 @@ func GetKobushis(ringID string, offset int) ([]Kobushis, error) {
 // NewMessage from KobushiID and Body text
 func NewMessage(kobushiID, body string) (Messages, error) {
 	m := new(Messages)
+	if len(body) == 0 {
+		return *m, errors.New("EMPTY BODY")
+	}
 	m.ID = kid.New(0)
 	m.KobushiID = kid.Parse(kobushiID)
 	if m.KobushiID.IsError() {
