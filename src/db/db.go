@@ -15,8 +15,8 @@ import (
 // Rings model
 type Rings struct {
 	ID     kid.ID `sql:"type:bigint unsigned" gorm:"primary_key"`
-	Title  string `sql:"type:char(255)"`
-	Author string `sql:"type:char(255)"`
+	Title  string `sql:"type:char(200)"`
+	Author string `sql:"type:char(200)"`
 	Desc   string `sql:"type:varchar(1000)"` // Description
 	Time   time.Time
 }
@@ -25,7 +25,7 @@ type Rings struct {
 type Kobushis struct {
 	ID     kid.ID `sql:"type:bigint unsigned" gorm:"primary_key"`
 	RingID kid.ID `sql:"type:bigint unsigned"`
-	Title  string `sql:"type:char(255)"`
+	Title  string `sql:"type:char(200)"`
 	Desc   string `sql:"type:varchar(1000)"` // Description
 	Time   time.Time
 }
