@@ -15,9 +15,9 @@ import (
 // Rings model
 type Rings struct {
 	ID     kid.ID `sql:"type:bigint unsigned" gorm:"primary_key"`
-	Title  string
-	Author string
-	Desc   string // Description
+	Title  string `sql:"type:char(255)"`
+	Author string `sql:"type:char(255)"`
+	Desc   string `sql:"type:varchar(1000)"` // Description
 	Time   time.Time
 }
 
@@ -25,8 +25,8 @@ type Rings struct {
 type Kobushis struct {
 	ID     kid.ID `sql:"type:bigint unsigned" gorm:"primary_key"`
 	RingID kid.ID `sql:"type:bigint unsigned"`
-	Title  string
-	Desc   string // Description
+	Title  string `sql:"type:char(255)"`
+	Desc   string `sql:"type:varchar(1000)"` // Description
 	Time   time.Time
 }
 
@@ -34,7 +34,7 @@ type Kobushis struct {
 type Messages struct {
 	ID        kid.ID `sql:"type:bigint unsigned" gorm:"primary_key"`
 	KobushiID kid.ID `sql:"type:bigint unsigned"`
-	Body      string
+	Body      string `sql:"type:varchar(2000)"`
 	Time      time.Time
 }
 
@@ -55,7 +55,10 @@ func NewRing(title, author, desc string) (Rings, error) {
 	r.Author = author
 	r.Desc = desc
 	r.Time = time.Now()
-	db.Create(r)
+	res := db.Create(r)
+	if e := res.Error; e != nil {
+		return *r, e
+	}
 	return *r, nil
 }
 
@@ -76,7 +79,10 @@ func GetRing(id string) (Rings, error) {
 // GetRings (max = ringsPageSize)
 func GetRings(offset int) ([]Rings, error) {
 	rs := new([]Rings)
-	db.Order("time desc").Limit(ringPageSize).Offset(offset * ringPageSize).Find(rs)
+	res := db.Order("time desc").Limit(ringPageSize).Offset(offset * ringPageSize).Find(rs)
+	if e := res.Error; e != nil {
+		return *rs, e
+	}
 	return *rs, nil
 }
 
@@ -94,7 +100,10 @@ func NewKobushi(title, ringID, desc string) (Kobushis, error) {
 	k.Title = title
 	k.Desc = desc
 	k.Time = time.Now()
-	db.Create(k)
+	res := db.Create(k)
+	if e := res.Error; e != nil {
+		return *k, e
+	}
 	return *k, nil
 }
 
@@ -119,7 +128,10 @@ func GetKobushis(ringID string, offset int) ([]Kobushis, error) {
 	if rID.IsError() {
 		return *ks, errors.New("INVALID RING ID")
 	}
-	db.Order("time desc").Limit(kobushiPageSize).Offset(offset*kobushiPageSize).Find(ks, "ring_id=?", rID)
+	res := db.Order("time desc").Limit(kobushiPageSize).Offset(offset*kobushiPageSize).Find(ks, "ring_id=?", rID)
+	if e := res.Error; e != nil {
+		return *ks, e
+	}
 	return *ks, nil
 }
 
@@ -136,7 +148,10 @@ func NewMessage(kobushiID, body string) (Messages, error) {
 	}
 	m.Body = body
 	m.Time = time.Now()
-	db.Create(m)
+	res := db.Create(m)
+	if e := res.Error; e != nil {
+		return *m, e
+	}
 	return *m, nil
 }
 
@@ -147,7 +162,10 @@ func GetMessages(kobushiID string, offset int) ([]Messages, error) {
 	if kID.IsError() {
 		return *ms, errors.New("INVALID KOBUSHI ID")
 	}
-	db.Order("time desc").Limit(messagePageSize).Offset(offset*messagePageSize).Find(ms, "kobushi_id=?", kID)
+	res := db.Order("time desc").Limit(messagePageSize).Offset(offset*messagePageSize).Find(ms, "kobushi_id=?", kID)
+	if e := res.Error; e != nil {
+		return *ms, e
+	}
 	return *ms, nil
 }
 
