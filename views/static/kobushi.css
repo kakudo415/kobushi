@@ -48,6 +48,10 @@
   font-size: 0.875rem;
   color: #0004;
 }
+#messages .contents .body {
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
 
 #new-message {
   margin-top: 1.75rem;
