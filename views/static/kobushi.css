@@ -71,12 +71,13 @@
   font-size: 0.875rem;
   color: #0008;
 }
-#new-message input {
+#new-message textarea {
   width: 100%;
   margin-bottom: 0.875rem;
   padding: 0.5rem;
   border: 1px solid #0001;
   background: #00000008;
+  resize: vertical;
 }
 #new-message .submit {
   width: 100%;
