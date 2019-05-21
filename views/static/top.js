@@ -5,7 +5,7 @@ const nextPageHTML = document.getElementById("next-page-button");
 const newRingFormHTML = document.forms["new-ring-form"];
 
 const sendNewRing = (title, author, desc) => {
-  fetch("/", {
+  fetch(location.href, {
     method: "POST",
     body: JSON.stringify({
       title: title,
