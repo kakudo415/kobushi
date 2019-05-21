@@ -1,6 +1,7 @@
 package page
 
 import (
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,8 @@ type kobushi struct {
 	Desc  string
 }
 
+var baseURL = "http://localhost:8080/"
+
 // Top page
 func Top(c *gin.Context) {
 	offset := parsePage(c)
@@ -31,12 +34,12 @@ func Top(c *gin.Context) {
 	var frs []ring
 	for _, v := range rs {
 		frs = append(frs, ring{
-			Path:  "./ring/" + v.ID.ToDec(),
+			Path:  "ring/" + v.ID.ToDec(),
 			Title: v.Title,
 			Desc:  v.Desc,
 		})
 	}
-	c.HTML(200, "top.html", gin.H{"Rings": frs})
+	c.HTML(200, "top.html", gin.H{"BaseURL": baseURL, "Rings": frs})
 }
 
 // Ring page
@@ -55,12 +58,12 @@ func Ring(c *gin.Context) {
 	var fks []kobushi
 	for _, v := range ks {
 		fks = append(fks, kobushi{
-			Path:  "./" + v.RingID.ToDec() + "/" + v.ID.ToDec(),
+			Path:  "ring/" + v.RingID.ToDec() + "/" + v.ID.ToDec(),
 			Title: v.Title,
 			Desc:  v.Desc,
 		})
 	}
-	c.HTML(200, "ring.html", gin.H{"Ring": r, "Kobushis": fks})
+	c.HTML(200, "ring.html", gin.H{"BaseURL": baseURL, "Ring": r, "Kobushis": fks})
 }
 
 // Kobushi page
@@ -81,7 +84,7 @@ func Kobushi(c *gin.Context) {
 		c.Status(404)
 		return
 	}
-	c.HTML(200, "kobushi.html", gin.H{"Ring": r, "Kobushi": k, "Messages": ms})
+	c.HTML(200, "kobushi.html", gin.H{"BaseURL": baseURL, "Ring": r, "Kobushi": k, "Messages": ms})
 }
 
 func parsePage(c *gin.Context) int {
@@ -92,4 +95,10 @@ func parsePage(c *gin.Context) int {
 	}
 	offset-- // 0,1,2... => 1,2,3...
 	return int(offset)
+}
+
+func init() {
+	if os.Getenv("GIN_MODE") == "release" {
+		baseURL = "https://kakudo.app/kobushi/"
+	}
 }

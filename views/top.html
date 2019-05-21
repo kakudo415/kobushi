@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  {{ template "HEAD" }}
-  <link rel="stylesheet" href="/static/top.css">
-  <script src="static/top.js" defer></script>
+  {{ template "INIT" }}
   <title>Kobushi</title>
+  <link rel="stylesheet" href="{{ .BaseURL }}static/common.css">
+  <link rel="stylesheet" href="{{ .BaseURL }}static/top.css">
+  <script src="{{ .BaseURL }}static/top.js" defer></script>
+  <script src="{{ .BaseURL }}static/common.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{{ .BaseURL }}static/favicon.png" type="image/png">
 </head>
 <body>
-  {{ template "HEADER" }}
+  <header>
+    <div>
+      <h1>
+        <a href="">
+          <img src="{{ .BaseURL }}static/kobushi-icon.svg" alt="kobushi icon">
+          <div>KoBuShi</div>
+        </a>
+      </h1>
+      <a class="ring-button" href="{{ .BaseURL }}#new-ring">話題を作る</a>
+    </div>
+  </header>
   <main>
     <div>
       <div id="rings">
@@ -18,7 +32,7 @@
         <div class="contents">
           {{ range .Rings }}
           <div>
-            <a href="{{ .Path }}">{{ .Title }}</a>
+            <a href="{{ $.BaseURL }}{{ .Path }}">{{ .Title }}</a>
             <div>{{ .Desc }}</div>
           </div>
           {{ end }}

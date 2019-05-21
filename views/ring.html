@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  {{ template "HEAD" }}
-  <link rel="stylesheet" href="/static/ring.css">
-  <script src="/static/ring.js" defer></script>
+  {{ template "INIT" }}
   <title>Kobushi</title>
+  <link rel="stylesheet" href="{{ .BaseURL }}static/common.css">
+  <link rel="stylesheet" href="{{ .BaseURL }}static/ring.css">
+  <script src="{{ .BaseURL }}static/common.js" defer></script>
+  <script src="{{ .BaseURL }}static/ring.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{{ .BaseURL }}static/favicon.png" type="image/png">
 </head>
 <body>
-  {{ template "HEADER" }}
+  <header>
+    <div>
+      <h1>
+        <a href="">
+          <img src="{{ .BaseURL }}static/kobushi-icon.svg" alt="kobushi icon">
+          <div>KoBuShi</div>
+        </a>
+      </h1>
+      <a class="ring-button" href="{{ .BaseURL }}#new-ring">話題を作る</a>
+    </div>
+  </header>
   <main>
     <div>
       <div id="breadcrumb">
-        <a href="/">Top</a>
+        <a href="{{ .BaseURL }}">Top</a>
         <i class="fas fa-angle-right"></i>
-        <a href="/ring/{{ .Ring.ID.ToDec }}">{{ .Ring.Title }}</a>
+        <a href="{{ .BaseURL }}ring/{{ .Ring.ID.ToDec }}">{{ .Ring.Title }}</a>
       </div>
       <div id="ring-info">
         <h1>{{ .Ring.Title }}</h1>
@@ -42,7 +56,7 @@
         <div class="contents">
           {{ range .Kobushis }}
           <div>
-            <a href="{{ .Path }}">{{ .Title }}</a>
+            <a href="{{ $.BaseURL }}{{ .Path }}">{{ .Title }}</a>
             {{ if .Desc }}
             <div>{{ .Desc }}</div>
             {{ end }}
