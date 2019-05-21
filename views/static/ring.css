@@ -15,6 +15,22 @@
   margin-top: 0.75rem;
   color: #0008;
 }
+#share {
+  margin-top: 1rem;
+  display: flex;
+}
+#share button {
+  margin-right: 0.75rem;
+  padding: 0.75rem 1rem;
+  display: block;
+  color: #FFF;
+  background: #007FFF;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+#share button:hover {
+  background: #007FFFCC;
+}
 
 #kobushis {
   margin-top: 1.5rem;
